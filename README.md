@@ -60,7 +60,7 @@ flowchart LR
 | 路徑 / Path | 內容 / What | 狀態 / Status |
 |---|---|---|
 | [`spec/`](spec/) | 我寫給 LLM agent 的收斂協作規範 / The convergence spec I wrote for the agents | ✅ |
-| [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | 待寫 / TODO |
+| [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | 1／8 |
 | [`discipline/`](discipline/) | 從實際失敗訂出的迭代紀律（通用版） / Iteration discipline derived from real failures | 待寫 / TODO |
 | [`templates/`](templates/) | 可直接套用的範本 / Reusable templates | 待寫 / TODO |
 | [`diagrams/`](diagrams/) | 自繪示意圖 / Hand-drawn diagrams | 待寫 / TODO |
