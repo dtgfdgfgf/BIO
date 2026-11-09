@@ -16,4 +16,4 @@
 | 05 | [人在迴路：覆核介面、判例→規則、LLM 看圖記分板 / Human in the loop](05_human_in_the_loop.md) | ✅ |
 | 06 | [取像條件與量測可信度 / Imaging domain and measurement trust](06_imaging_domain_and_measurement_trust.md) | ✅ |
 | 07 | [LLM 專案的知識架構 / Knowledge architecture for an LLM project](07_knowledge_architecture.md) | ✅ |
-| 08 | 交機工程 / Handover engineering | 待寫 |
+| 08 | [交機工程 / Handover engineering](08_handover_engineering.md) | ✅ |
