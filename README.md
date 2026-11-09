@@ -3,8 +3,8 @@
 **以 LLM coding agent 接手並改造一套工業 AOI 機台程式：我從中學到的收斂方法。**
 **Taking over and rebuilding an industrial AOI machine program with LLM coding agents — what I learned about making them converge.**
 
-> 草稿（2026-11）。內容陸續補上，狀態見下方「導覽」。
-> Draft (2026-11). Content is being added; see Contents for status.
+> 2026-11：成長整理 8 篇已完成；`discipline/`、`templates/`、`diagrams/` 陸續補上。
+> Nov 2026: all eight growth notes are done; `discipline/`, `templates/` and `diagrams/` are in progress.
 
 ---
 
@@ -43,17 +43,33 @@ flowchart LR
 ## 成長重點 / Key takeaways
 
 1. **要改的不是提示詞，是「什麼算完成」。** 完成與否由檔案（diff、分佈、封存集數字）裁定，不由 LLM 自述。
-   *Change the definition of done, not the prompt wording. Files decide completion, not the agent's self-report.*
+   *Change the definition of done, not the prompt wording. Files decide completion, not the agent's self-report.* → [02](growth/02_from_writing_code_to_converging.md)
 2. **LLM 在基準失敗時會換更強的工具，而不是修失敗原因。** 方法選擇要在第零天由人在失敗圖上簽核。
-   *When a baseline fails, an LLM tends to swap in a stronger tool instead of fixing the cause. A human should sign off the method on the failure images, on day zero.*
+   *When a baseline fails, an LLM tends to swap in a stronger tool instead of fixing the cause. A human should sign off the method on the failure images, on day zero.* → [03](growth/03_method_family_drift.md)
 3. **每輪關掉一個開放問題，而不是改善一個數字。**
-   *Each round should close one open question, not improve one number.*
+   *Each round should close one open question, not improve one number.* → [04](growth/04_two_images_vs_2m_tokens.md)
 4. **多代理放大的是執行品質，不是方向正確性。**
-   *Multi-agent runs amplify execution quality, not directional correctness.*
+   *Multi-agent runs amplify execution quality, not directional correctness.* → [04](growth/04_two_images_vs_2m_tokens.md)
 5. **LLM 的眼睛要用在人前面，並留下可對答案的紀錄。**
-   *Let the LLM look before the human does, and keep a record that can be scored against the human.*
+   *Let the LLM look before the human does, and keep a record that can be scored against the human.* → [05](growth/05_human_in_the_loop.md)
 6. **LLM 專案要有單一正本、可載入的程序知識、跨 session 記憶與明確的授權語義。**
-   *An LLM project needs one source of truth, loadable procedures, cross-session memory and explicit authorization semantics.*
+   *An LLM project needs one source of truth, loadable procedures, cross-session memory and explicit authorization semantics.* → [07](growth/07_knowledge_architecture.md)
+
+## 從哪裡讀起 / Where to start
+
+時間不多就先讀 02（主線），再挑一篇案例（03 或 04）。
+Short on time? Read 02 (the main thread), then one case study (03 or 04).
+
+| 篇 / Note | 一句話 / In one line |
+|---|---|
+| [02 從「讓 LLM 寫程式」到「讓 LLM 收斂」](growth/02_from_writing_code_to_converging.md) | 主線：迭代紀律 v1～v7 各從哪一次失敗長出來 / The main thread: where each version of the iteration discipline came from |
+| [03 方法族漂移](growth/03_method_family_drift.md) | LLM 自選 6 次方法，0 次留下 / The agent picked a method six times; none survived |
+| [04 224 萬 token 被兩張圖推翻](growth/04_two_images_vs_2m_tokens.md) | 規則全守了還是走錯，缺的是階段閘門 / Every rule followed, still wrong: the missing stage gate |
+| [05 人在迴路](growth/05_human_in_the_loop.md) | 我的判斷怎麼留下來，怎麼替 LLM 的眼睛打分數 / Keeping human verdicts, and scoring the agent's eyes |
+| [06 取像條件與量測可信度](growth/06_imaging_domain_and_measurement_trust.md) | 常數屬於取像條件，不屬於演算法 / Constants belong to the imaging setup, not the algorithm |
+| [07 LLM 專案的知識架構](growth/07_knowledge_architecture.md) | 單一正本、skills、跨 session 記憶、授權語義 / One source of truth, skills, memory, authorization |
+| [01 接手遺留系統](growth/01_legacy_takeover.md) | 先唯讀、先建基準線、先確認哪一份是正本 / Read-only first, baseline first, confirm the source of truth |
+| [08 交機工程](growth/08_handover_engineering.md) | 從「能跑」到「交得出去」 / From "it runs" to "it can be handed over" |
 
 ## 導覽 / Contents
 
