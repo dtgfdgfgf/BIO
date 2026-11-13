@@ -3,8 +3,8 @@
 **以 LLM coding agent 接手並改造一套工業 AOI 機台程式：我從中學到的收斂方法。**
 **Taking over and rebuilding an industrial AOI machine program with LLM coding agents — what I learned about making them converge.**
 
-> 2026-11：成長整理 9 篇、迭代紀律通用版、可套用的範本與 skills、示意圖都已完成。
-> Nov 2026: the nine growth notes, the generalized iteration discipline, reusable templates and skills, and the diagrams are all done.
+> 2026-11：成長整理 10 篇、迭代紀律通用版、可套用的範本與 skills、示意圖都已完成。
+> Nov 2026: the ten growth notes, the generalized iteration discipline, reusable templates and skills, and the diagrams are all done.
 
 ---
 
@@ -51,20 +51,23 @@ flowchart LR
 4. **每輪關掉一個開放問題，而不是改善一個數字。**
    *Each round should close one open question, not improve one number.* → [04](growth/04_two_images_vs_2m_tokens.md)
 5. **多代理放大的是執行品質，不是方向正確性。**
-   *Multi-agent runs amplify execution quality, not directional correctness.* → [04](growth/04_two_images_vs_2m_tokens.md)
+   *Multi-agent runs amplify execution quality, not directional correctness.* → [04](growth/04_two_images_vs_2m_tokens.md)、[10](growth/10_does_it_hold_elsewhere.md)
 6. **覆核是驗證工具，不是導航；LLM 的眼睛要用在人前面，並留下可對答案的紀錄。**
    *Human review verifies; it does not navigate. Let the LLM look before the human does, and keep a record that can be scored against the human.* → [05](growth/05_human_in_the_loop.md)
 7. **LLM 專案要有單一正本、可載入的程序知識、跨 session 記憶與明確的授權語義。**
    *An LLM project needs one source of truth, loadable procedures, cross-session memory and explicit authorization semantics.* → [07](growth/07_knowledge_architecture.md)
+8. **這些結論不只在單一專案成立。** 同一年另外 20 多個案子交叉檢查過：收斂靠領域知識、多代理只適合反證，在別的產品上都重複出現。commit 訊息、錯誤訊息、代理說的「已完成」都是自述，不是證據。
+   *These lessons are not one-project accidents. Cross-checked against 20+ other projects from the same year, domain-driven convergence and refutation-only use of multi-agent runs held elsewhere. Commit messages, error messages and an agent's "done" are self-reports, not evidence.* → [10](growth/10_does_it_hold_elsewhere.md)
 
 ## 從哪裡讀起 / Where to start
 
-時間不多就先讀 09（結論），再讀 02（主線），最後挑一篇案例（03 或 04）。
-Short on time? Read 09 (the conclusion), then 02 (the main thread), then one case study (03 or 04).
+時間不多就先讀 09（結論），再讀 02（主線），最後挑一篇案例（03 或 04）。想確認這些結論不只在單一專案成立，讀 10。
+Short on time? Read 09 (the conclusion), then 02 (the main thread), then one case study (03 or 04). To see whether the lessons hold beyond one project, read 10.
 
 | 篇 / Note | 一句話 / In one line |
 |---|---|
 | [09 標註不等於收斂](growth/09_labels_are_not_convergence.md) | 以為標好 OK／NG 就能讓 LLM 收斂，結果收斂靠的是我對影像分區的判斷 / I expected labels to drive convergence; my reading of the image zones did |
+| [10 換了專案還成立嗎](growth/10_does_it_hold_elsewhere.md) | 一年 20 多個案子交叉檢查：哪些結論在別處也成立，哪個教訓學了兩次 / Cross-checking 20+ projects: which lessons held elsewhere, and which one I had to learn twice |
 | [02 從「讓 LLM 寫程式」到「讓 LLM 收斂」](growth/02_from_writing_code_to_converging.md) | 主線：迭代紀律 v1～v7 各從哪一次失敗長出來 / The main thread: where each version of the iteration discipline came from |
 | [03 方法族漂移](growth/03_method_family_drift.md) | LLM 自選 6 次方法，0 次留下 / The agent picked a method six times; none survived |
 | [04 224 萬 token 被兩張圖推翻](growth/04_two_images_vs_2m_tokens.md) | 規則全守了還是走錯，缺的是階段閘門 / Every rule followed, still wrong: the missing stage gate |
@@ -82,7 +85,7 @@ Want something you can use right away? Start with the ten-rule index in [`discip
 | 路徑 / Path | 內容 / What | 狀態 / Status |
 |---|---|---|
 | [`spec/`](spec/) | 我寫給 LLM agent 的收斂協作規範 / The convergence spec I wrote for the agents | ✅ |
-| [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | ✅ 9／9 |
+| [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | ✅ 10／10 |
 | [`discipline/`](discipline/) | 從實際失敗訂出的迭代紀律「紀律零＋九條」（通用版）：每條的起因、規則、執行方式 / The ten iteration rules, each with its triggering failure and enforcement | ✅ |
 | [`templates/`](templates/) | 可直接套用的範本：專案指令骨架、3 個通用 skill＋骨架、記憶條目、現況卡、方法選擇書、記分板、每輪檢核區塊 / Reusable templates: instruction skeleton, three skills plus a skeleton, memory entry, status card, method sheet, scoreboards, checklist | ✅ |
 | [`diagrams/`](diagrams/) | 自繪示意圖 7 組（Mermaid） / Seven hand-drawn Mermaid diagrams | ✅ |

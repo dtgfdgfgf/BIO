@@ -18,3 +18,4 @@
 | 07 | [LLM 專案的知識架構 / Knowledge architecture for an LLM project](07_knowledge_architecture.md) | ✅ |
 | 08 | [交機工程 / Handover engineering](08_handover_engineering.md) | ✅ |
 | 09 | [標註不等於收斂：讓演算法收斂的是我對影像的判斷 / Labels are not convergence: domain knowledge is](09_labels_are_not_convergence.md) | ✅ |
+| 10 | [換了專案還成立嗎：一年 20 多個案子的交叉檢查 / Does it hold elsewhere? Cross-checking 20+ projects](10_does_it_hold_elsewhere.md) | ✅ |
