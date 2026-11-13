@@ -17,3 +17,4 @@
 | 06 | [取像條件與量測可信度 / Imaging domain and measurement trust](06_imaging_domain_and_measurement_trust.md) | ✅ |
 | 07 | [LLM 專案的知識架構 / Knowledge architecture for an LLM project](07_knowledge_architecture.md) | ✅ |
 | 08 | [交機工程 / Handover engineering](08_handover_engineering.md) | ✅ |
+| 09 | [標註不等於收斂：讓演算法收斂的是我對影像的判斷 / Labels are not convergence: domain knowledge is](09_labels_are_not_convergence.md) | ✅ |

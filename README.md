@@ -3,8 +3,8 @@
 **以 LLM coding agent 接手並改造一套工業 AOI 機台程式：我從中學到的收斂方法。**
 **Taking over and rebuilding an industrial AOI machine program with LLM coding agents — what I learned about making them converge.**
 
-> 2026-11：成長整理 8 篇、迭代紀律通用版、可套用的範本與 skills、示意圖都已完成。
-> Nov 2026: the eight growth notes, the generalized iteration discipline, reusable templates and skills, and the diagrams are all done.
+> 2026-11：成長整理 9 篇、迭代紀律通用版、可套用的範本與 skills、示意圖都已完成。
+> Nov 2026: the nine growth notes, the generalized iteration discipline, reusable templates and skills, and the diagrams are all done.
 
 ---
 
@@ -16,9 +16,9 @@ From June to November 2026 I took over an existing industrial AOI (automated opt
 
 ## 我的角色 / My role
 
-LLM 寫程式；我負責方向、瑕疵定義、拍板、驗證設計，以及約束 LLM 的規則。這個 repo 整理的就是後者：在真值模糊、要靠人覆核的視覺檢測裡，怎麼讓 LLM 的迭代真正收斂，而不是在開發集上越調越好看。
+LLM 寫程式；我負責方向、瑕疵定義、看圖判斷（分區、已知結構）、拍板、驗證設計，以及約束 LLM 的規則。這個 repo 整理的就是後者：在真值模糊、要靠人覆核的視覺檢測裡，怎麼讓 LLM 的迭代真正收斂，而不是在開發集上越調越好看。
 
-The agents wrote the code. I owned direction, defect definitions, sign-offs, verification design, and the rules that constrain the agents. This repo is about the latter: how to make LLM iterations actually converge in vision inspection where ground truth is fuzzy and humans do the review, instead of just looking better on the development set.
+The agents wrote the code. I owned direction, defect definitions, reading the images (zones, known structures), sign-offs, verification design, and the rules that constrain the agents. This repo is about the latter: how to make LLM iterations actually converge in vision inspection where ground truth is fuzzy and humans do the review, instead of just looking better on the development set.
 
 ## 時間軸 / Timeline
 
@@ -42,26 +42,29 @@ flowchart LR
 
 ## 成長重點 / Key takeaways
 
-1. **要改的不是提示詞，是「什麼算完成」。** 完成與否由檔案（diff、分佈、封存集數字）裁定，不由 LLM 自述。
+1. **讓演算法收斂的是領域知識，不是標註。** 標註給的是答案，不是看圖的方式；分哪幾區、哪些是已知結構、異物比背景亮還是暗，要由人從影像裡看出來。高精度場域，AI 是加速器，方向盤在人手上。
+   *Domain knowledge, not labels, made the algorithm converge. Labels give answers, not a way of looking at the image. In high-precision inspection, AI is the accelerator and the human keeps the steering wheel.* → [09](growth/09_labels_are_not_convergence.md)
+2. **要改的不是提示詞，是「什麼算完成」。** 完成與否由檔案（diff、分佈、封存集數字）裁定，不由 LLM 自述。
    *Change the definition of done, not the prompt wording. Files decide completion, not the agent's self-report.* → [02](growth/02_from_writing_code_to_converging.md)
-2. **LLM 在基準失敗時會換更強的工具，而不是修失敗原因。** 方法選擇要在第零天由人在失敗圖上簽核。
+3. **LLM 在基準失敗時會換更強的工具，而不是修失敗原因。** 方法選擇要在第零天由人在失敗圖上簽核。
    *When a baseline fails, an LLM tends to swap in a stronger tool instead of fixing the cause. A human should sign off the method on the failure images, on day zero.* → [03](growth/03_method_family_drift.md)
-3. **每輪關掉一個開放問題，而不是改善一個數字。**
+4. **每輪關掉一個開放問題，而不是改善一個數字。**
    *Each round should close one open question, not improve one number.* → [04](growth/04_two_images_vs_2m_tokens.md)
-4. **多代理放大的是執行品質，不是方向正確性。**
+5. **多代理放大的是執行品質，不是方向正確性。**
    *Multi-agent runs amplify execution quality, not directional correctness.* → [04](growth/04_two_images_vs_2m_tokens.md)
-5. **LLM 的眼睛要用在人前面，並留下可對答案的紀錄。**
-   *Let the LLM look before the human does, and keep a record that can be scored against the human.* → [05](growth/05_human_in_the_loop.md)
-6. **LLM 專案要有單一正本、可載入的程序知識、跨 session 記憶與明確的授權語義。**
+6. **覆核是驗證工具，不是導航；LLM 的眼睛要用在人前面，並留下可對答案的紀錄。**
+   *Human review verifies; it does not navigate. Let the LLM look before the human does, and keep a record that can be scored against the human.* → [05](growth/05_human_in_the_loop.md)
+7. **LLM 專案要有單一正本、可載入的程序知識、跨 session 記憶與明確的授權語義。**
    *An LLM project needs one source of truth, loadable procedures, cross-session memory and explicit authorization semantics.* → [07](growth/07_knowledge_architecture.md)
 
 ## 從哪裡讀起 / Where to start
 
-時間不多就先讀 02（主線），再挑一篇案例（03 或 04）。
-Short on time? Read 02 (the main thread), then one case study (03 or 04).
+時間不多就先讀 09（結論），再讀 02（主線），最後挑一篇案例（03 或 04）。
+Short on time? Read 09 (the conclusion), then 02 (the main thread), then one case study (03 or 04).
 
 | 篇 / Note | 一句話 / In one line |
 |---|---|
+| [09 標註不等於收斂](growth/09_labels_are_not_convergence.md) | 以為標好 OK／NG 就能讓 LLM 收斂，結果收斂靠的是我對影像分區的判斷 / I expected labels to drive convergence; my reading of the image zones did |
 | [02 從「讓 LLM 寫程式」到「讓 LLM 收斂」](growth/02_from_writing_code_to_converging.md) | 主線：迭代紀律 v1～v7 各從哪一次失敗長出來 / The main thread: where each version of the iteration discipline came from |
 | [03 方法族漂移](growth/03_method_family_drift.md) | LLM 自選 6 次方法，0 次留下 / The agent picked a method six times; none survived |
 | [04 224 萬 token 被兩張圖推翻](growth/04_two_images_vs_2m_tokens.md) | 規則全守了還是走錯，缺的是階段閘門 / Every rule followed, still wrong: the missing stage gate |
@@ -79,7 +82,7 @@ Want something you can use right away? Start with the ten-rule index in [`discip
 | 路徑 / Path | 內容 / What | 狀態 / Status |
 |---|---|---|
 | [`spec/`](spec/) | 我寫給 LLM agent 的收斂協作規範 / The convergence spec I wrote for the agents | ✅ |
-| [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | ✅ 8／8 |
+| [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | ✅ 9／9 |
 | [`discipline/`](discipline/) | 從實際失敗訂出的迭代紀律「紀律零＋九條」（通用版）：每條的起因、規則、執行方式 / The ten iteration rules, each with its triggering failure and enforcement | ✅ |
 | [`templates/`](templates/) | 可直接套用的範本：專案指令骨架、3 個通用 skill＋骨架、記憶條目、現況卡、方法選擇書、記分板、每輪檢核區塊 / Reusable templates: instruction skeleton, three skills plus a skeleton, memory entry, status card, method sheet, scoreboards, checklist | ✅ |
 | [`diagrams/`](diagrams/) | 自繪示意圖 7 組（Mermaid） / Seven hand-drawn Mermaid diagrams | ✅ |
