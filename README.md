@@ -3,8 +3,8 @@
 **以 LLM coding agent 接手並改造一套工業 AOI 機台程式：我從中學到的收斂方法。**
 **Taking over and rebuilding an industrial AOI machine program with LLM coding agents — what I learned about making them converge.**
 
-> 2026-11：成長整理 8 篇已完成；`discipline/`、`templates/`、`diagrams/` 陸續補上。
-> Nov 2026: all eight growth notes are done; `discipline/`, `templates/` and `diagrams/` are in progress.
+> 2026-11：成長整理 8 篇、迭代紀律通用版、可套用的範本與 skills、示意圖都已完成。
+> Nov 2026: the eight growth notes, the generalized iteration discipline, reusable templates and skills, and the diagrams are all done.
 
 ---
 
@@ -71,15 +71,18 @@ Short on time? Read 02 (the main thread), then one case study (03 or 04).
 | [01 接手遺留系統](growth/01_legacy_takeover.md) | 先唯讀、先建基準線、先確認哪一份是正本 / Read-only first, baseline first, confirm the source of truth |
 | [08 交機工程](growth/08_handover_engineering.md) | 從「能跑」到「交得出去」 / From "it runs" to "it can be handed over" |
 
+想直接拿去用：先看 [`discipline/`](discipline/) 的十條一覽，再到 [`templates/`](templates/) 挑專案指令骨架和 skills。
+Want something you can use right away? Start with the ten-rule index in [`discipline/`](discipline/), then pick the instruction skeleton and skills in [`templates/`](templates/).
+
 ## 導覽 / Contents
 
 | 路徑 / Path | 內容 / What | 狀態 / Status |
 |---|---|---|
 | [`spec/`](spec/) | 我寫給 LLM agent 的收斂協作規範 / The convergence spec I wrote for the agents | ✅ |
 | [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | ✅ 8／8 |
-| [`discipline/`](discipline/) | 從實際失敗訂出的迭代紀律（通用版） / Iteration discipline derived from real failures | 待寫 / TODO |
-| [`templates/`](templates/) | 可直接套用的範本 / Reusable templates | 待寫 / TODO |
-| [`diagrams/`](diagrams/) | 自繪示意圖 / Hand-drawn diagrams | 待寫 / TODO |
+| [`discipline/`](discipline/) | 從實際失敗訂出的迭代紀律「紀律零＋九條」（通用版）：每條的起因、規則、執行方式 / The ten iteration rules, each with its triggering failure and enforcement | ✅ |
+| [`templates/`](templates/) | 可直接套用的範本：專案指令骨架、3 個通用 skill＋骨架、記憶條目、現況卡、方法選擇書、記分板、每輪檢核區塊 / Reusable templates: instruction skeleton, three skills plus a skeleton, memory entry, status card, method sheet, scoreboards, checklist | ✅ |
+| [`diagrams/`](diagrams/) | 自繪示意圖 7 組（Mermaid） / Seven hand-drawn Mermaid diagrams | ✅ |
 
 ## 不在這裡的東西 / What is not here
 
