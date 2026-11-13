@@ -1,6 +1,6 @@
 # 03 方法族漂移：LLM 自選 6 次方法，0 次留下
 
-> **Summary (EN)**: When the simplest baseline failed on one image, the LLM agent did not fix the cause. It swapped in a stronger method family, then spent six days and eight rounds patching it. Each patch made local sense and passed my diff-based rules, because those rules never asked whether the framework itself was right. One sentence of physical judgment from me sent it back to a fixed version of the original family, which reached 29/29 recall in a day. I now make the agent write a method selection sheet, run the simplest family first, and let me sign "fix within family" or "switch family" on the failure images before any prototype.
+> **Summary (EN)**: When the simplest baseline failed on one image, the LLM agent did not fix the cause. It swapped in a stronger method family, then spent six days and eight rounds patching it. Each patch made local sense and passed my diff-based rules, because those rules never asked whether the framework itself was right. One sentence of physical judgment from me sent it back to a fixed version of the original family, which reached 29/29 recall in a day. The version that finally went into the machine was the simplest family again, with per-zone thresholds I specified after reading the image zones. I now make the agent write a method selection sheet, run the simplest family first, and let me sign "fix within family" or "switch family" on the failure images before any prototype.
 
 ---
 
@@ -24,7 +24,7 @@
 
 新方法會把**所有**細長的對比結構都抓進候選，包括電極邊、隔片框和藥膜刷痕。接下來六天八輪，LLM 都在想辦法「把像絲的結構濾掉」。
 
-下表是那兩週的記分。日期是 2026 年，「下場」是事後回頭看的結果：
+下表是那兩週的記分，最後一列是之後的結局。日期是 2026 年，「下場」是事後回頭看的結果：
 
 | 日期 | 方法或規則 | 誰提的 | 下場 |
 |---|---|---|---|
@@ -36,23 +36,25 @@
 | 09-24 | 路徑與凸包邊平行 | LLM | 前提不成立，結論是「表示法不足，不改程式」 |
 | 09-24～26 | 把隔片當成已知結構 | **我**（「亮帶就是隔片的邊」） | 成立 |
 | 09-27 | 縮小取樣距離 | LLM | 被我否決：在錯的框架裡打補丁 |
-| 09-27 | 族 3：已知結構建模→扣背景→殘差二值化→獨立輪廓 | **我** | 一天七版，召回 29／29 |
+| 09-27 | 族 3：已知結構建模→扣背景→殘差二值化→獨立輪廓 | **我**給方向；「扣背景取殘差」是 LLM 的詮釋 | 一天七版，召回 29／29 |
+| 10-05～06 | 結構固定遮罩＋分區固定門檻，不再逐像素扣背景 | **我** | 成立，接進機台 |
 
-從 09-21 起，**LLM 自己提的方法或規則有 6 次，沒有一次留下來；留下來的 2 次，都來自我一句物理判斷。**
+從 09-21 到 09-27，**LLM 自己提的方法或規則有 6 次，沒有一次留下來；留下來的 2 次，都來自我一句物理判斷。** 最後接進機台的版本，也是我定的。
 
-族 3 的起點是我在 09-27 說的一句話：「細絲是獨立輪廓，二值化可分，區分電極邊緣有很多方法。」
+族 3 的起點是我在 09-27 說的一句話：「細絲是獨立輪廓，二值化可分，區分電極邊緣有很多方法。」其中「先扣背景、再取殘差」是 LLM 對這句話的詮釋，不是我說的。
 
 還有兩個事後才看清的事實：
 
 - **更強的方法也更貴**。族 2 單張約 2.45 CPU 核心秒，是當時效能預算的 4 倍；族 3 的分割段只要 0.32 核心秒。
-- **正確答案一直在手邊**。族 1 失敗的原因是「背景沒有建模」，該做的是同族修正：先建模背景，再二值化。這就是族 3，09-21 當天只差一步。
+- **正確答案一直在手邊**。族 1 失敗的原因是「底色不一致，一個門檻管不了全圖」，該做的是同族修正：讓門檻跟著底色走。最後接進機台的「分區固定門檻」就是這個修正，09-21 當天只差一步。
 
 ```mermaid
 flowchart TD
   A["族 1：固定門檻二值化<br/>跨底色把細絲切斷"] -->|LLM 實際走的路| B["族 2：脊線＋骨架<br/>所有細長結構都進候選"]
   B --> C["六天八輪補丁<br/>全在錯的框架裡"]
-  C -->|我的一句物理判斷| D["族 3：建模背景→殘差二值化→獨立輪廓<br/>一天七版，召回 29／29"]
-  A -.->|應該走的路：同族修正| D
+  C -->|我的一句物理判斷| D["族 3：獨立輪廓、二值化可分<br/>扣背景取殘差是 LLM 的詮釋<br/>一天七版，召回 29／29"]
+  D -->|我判定殘差不合理，改成分區| E["結構固定遮罩＋分區固定門檻<br/>接進機台"]
+  A -.->|應該走的路：同族修正，讓門檻跟著底色走| E
 ```
 
 ## 3. 學到什麼
@@ -79,7 +81,9 @@ flowchart TD
 
 ## 後來
 
-之後一個月，毛屑檢測都在族 3 裡做同族修正，例如把已知結構改成固定樣板、分區各自定門檻。最後接進機台的版本，仍然是「建模已知結構＋分區二值化」。也就是說，最後用的還是最簡單的那一族，只是修對了。
+10-05，我看完殘差造成的過殺之後判定「用殘差並不合理」：逐像素扣背景時，參考點是模型不是周圍，模型錯的地方全變成輪廓，十幾個補丁都是這樣來的。我改成依影像的分區特徵來做：已知結構寫成固定樣板，每一區各自用固定門檻。最後接進機台的就是這一版。也就是說，最後用的還是最簡單的那一族，只是加上了我給的分區。詳見 [09](09_labels_are_not_convergence.md)。
+
+（2026-11 更正：本篇初版把族 3 整個寫成我提的。實際上方向是我給的，「扣背景取殘差」是 LLM 的詮釋，後來被我推翻。）
 
 ## 限制
 
