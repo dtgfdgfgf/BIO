@@ -35,7 +35,7 @@ The agents wrote the code. I owned direction, defect definitions, reading the im
 
 ```mermaid
 flowchart LR
-  A[定義<br/>Definition] --> B[成像<br/>Imaging] --> C[結構建模<br/>Structure] --> D[判別<br/>Discrimination] --> E[邊界與門檻<br/>Boundary]
+  A[定義<br/>Definition] --> B[成像<br/>Imaging] --> C[標出已知結構<br/>Known structures] --> D[判別<br/>Discrimination] --> E[邊界與門檻<br/>Boundary]
 ```
 
 上游沒收斂時調下游參數，做的功是負的。 / Tuning downstream while upstream is unsettled is negative work.
@@ -87,7 +87,7 @@ Want something you can use right away? Start with the ten-rule index in [`discip
 | [`spec/`](spec/) | 我寫給 LLM agent 的收斂協作規範 / The convergence spec I wrote for the agents | ✅ |
 | [`growth/`](growth/) | 成長整理：每篇「當時怎麼做→出了什麼事→學到什麼→現在怎麼做」 / Growth notes | ✅ 10／10 |
 | [`discipline/`](discipline/) | 從實際失敗訂出的迭代紀律「紀律零＋九條」（通用版）：每條的起因、規則、執行方式 / The ten iteration rules, each with its triggering failure and enforcement | ✅ |
-| [`templates/`](templates/) | 可直接套用的範本：專案指令骨架、3 個通用 skill＋骨架、記憶條目、現況卡、方法選擇書、記分板、每輪檢核區塊 / Reusable templates: instruction skeleton, three skills plus a skeleton, memory entry, status card, method sheet, scoreboards, checklist | ✅ |
+| [`templates/`](templates/) | 可直接套用的範本：專案指令骨架、3 個通用 skill＋骨架、記憶條目、現況表、方法選擇書、記分板、每輪檢核區塊 / Reusable templates: instruction skeleton, three skills plus a skeleton, memory entry, status card, method sheet, scoreboards, checklist | ✅ |
 | [`diagrams/`](diagrams/) | 自繪示意圖 7 組（Mermaid） / Seven hand-drawn Mermaid diagrams | ✅ |
 
 ## 不在這裡的東西 / What is not here

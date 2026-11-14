@@ -22,7 +22,7 @@
 
 ```mermaid
 flowchart LR
-  D["定義<br/>這算不算瑕疵"] --> I["成像<br/>穩定看得到嗎"] --> S["結構建模<br/>每一層都建了嗎"] --> J["判別<br/>候選怎麼分"] --> B["邊界與門檻<br/>線畫在哪"]
+  D["定義<br/>這算不算瑕疵"] --> I["成像<br/>穩定看得到嗎"] --> S["標出已知結構<br/>每一層都標出來了嗎"] --> J["判別<br/>候選怎麼分"] --> B["邊界與門檻<br/>線畫在哪"]
 ```
 
 ```mermaid
@@ -103,7 +103,7 @@ flowchart TD
   subgraph SRC["正本（只在這裡改）"]
     AG["AGENTS.md<br/>鐵律＋路由"]
     SK[".claude/skills/<br/>需要時才載入的程序"]
-    DOC["docs/<br/>紀律、協定、現況卡"]
+    DOC["docs/<br/>紀律、協定、現況表"]
   end
   subgraph CC["Claude Code"]
     CM["CLAUDE.md<br/>第一行 @AGENTS.md"]

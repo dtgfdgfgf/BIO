@@ -2,7 +2,7 @@
 
 > **Summary (EN)**: Two append-only tables kept on each inspection line's status card. The method scoreboard records every method or rule choice, who proposed it (agent or human), why, and what became of it; it does not make the agent smarter, but it lets the human see by round three that "the agent's framework is about to die again" instead of round ten. The prejudge scoreboard records how the agent's first look at each candidate compared with the human's verdict, which is the evidence for how far the agent's eyes can be trusted.
 
-兩張表都放在該線現況卡（[status_card.md](status_card.md)），**只增不改**：舊列不改寫，下場有變就加新列。
+兩張表都放在該線現況表（[status_card.md](status_card.md)），**只增不改**：舊列不改寫，下場有變就加新列。
 
 ## 1. 方法層記分板（紀律八 8c）
 
@@ -31,7 +31,7 @@
 | 09-24 | 路徑與暗區凸包邊平行 | LLM | 擋亮帶 | 不成立，誤殺一條真細絲 → 結論「表示法不足」 |
 | 09-24 | 把某個亮帶當已知結構 | **使用者** | 「亮帶是某結構的邊」 | 成立 |
 | 09-27 | 縮小取樣距離 | LLM | 召回優先 | 使用者否決：「在錯的框架裡打補丁」 |
-| 09-27 | 路線 3：結構建模 → 扣背景 → 殘差二值化 → 獨立輪廓 | **使用者**給方向，LLM 詮釋 | 我：「細絲是獨立輪廓，二值化可分」；「扣背景取殘差」是 LLM 加的 | 一天七版，召回 29／29；之後殘差在背景模型錯的地方產生一串補丁 |
+| 09-27 | 路線 3：標出已知結構 → 扣背景 → 殘差二值化 → 獨立輪廓 | **使用者**給方向，LLM 詮釋 | 我：「細絲是獨立輪廓，二值化可分」；「扣背景取殘差」是 LLM 加的 | 一天七版，召回 29／29；之後殘差在背景模型錯的地方產生一串補丁 |
 | 10-05～06 | 結構固定遮罩＋分區固定門檻，不再逐像素扣背景 | **使用者** | 「用殘差並不合理」「可以接受只抓很明顯的」「不是增加方法而是分區」 | 成立，接進機台 |
 
 **讀法**：從 09-21 起，LLM 自己選了 6 次方法或規則，0 次留下；留下來的，都是我的一句物理判斷，再由 LLM 實作。最後接進機台的版本，是我依影像的分區特徵定的。

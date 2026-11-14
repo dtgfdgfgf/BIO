@@ -13,7 +13,7 @@ description: 兩個 coding agent（例如 Claude Code 與 Codex）輪流或並�
 |---|---|---|
 | 專案指令 | `AGENTS.md` | Claude Code：`CLAUDE.md` 第一行 `@AGENTS.md` 匯入 |
 | 專案 skills | `.claude/skills/<name>/` | Codex：`.agents/skills/<name>/`＝鏡射，由同步腳本產生，不手改 |
-| 進度與拍板 | `docs/README.md` → `docs/current/` 現況卡 | 兩邊相同 |
+| 進度與拍板 | `docs/README.md` → `docs/current/` 現況表 | 兩邊相同 |
 | 交接摘要 | `docs/current/agent_handoff.md` | 待核對的摘要；不是規格、不是寫入鎖 |
 
 - 聊天記憶不共享。一邊匯入另一邊的對話紀錄時，只當線索，不當證據。
@@ -41,7 +41,7 @@ description: 兩個 coding agent（例如 Claude Code 與 Codex）輪流或並�
 
 - **什麼時候寫**：使用者明說「交接給 X」「更新交接卡」時才寫。問「目前進度」只回覆，不寫檔。寫卡只授權寫卡，不授權改程式、commit 或碰硬體。
 - **怎麼寫**：照下面的章節全部重填、不留舊內容；「Repository 基準」直接貼探測腳本輸出。
-- **不寫**：secrets、整段對話、和任務無關的私人資料、另一份規格（規格寫進現況卡，卡只指過去）。
+- **不寫**：secrets、整段對話、和任務無關的私人資料、另一份規格（規格寫進現況表，卡只指過去）。
 
 ```markdown
 # 交接卡

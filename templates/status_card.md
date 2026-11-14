@@ -1,11 +1,11 @@
-# 檢測線現況卡骨架
+# 檢測線現況表骨架
 
 > **Summary (EN)**: One status card per inspection line. It is the place for volatile status, so the project instruction file never has to hold it. A line counts as frozen only when its status card and the entry route are updated together. Sections are ordered so that a new session reads the machine status and the settled physical facts first.
 
-現況卡是「會變的東西」唯一的家。專案指令檔只放一行指向它；**定版＝同步更新該線現況卡＋入口路由，否則不算定版。**
+現況表是「會變的東西」唯一的家。專案指令檔只放一行指向它；**定版＝同步更新該線現況表＋入口路由，否則不算定版。**
 
 ```markdown
-# <檢測線名稱>：現況卡
+# <檢測線名稱>：現況表
 
 > STATUS：<研究中／已定版／已接入／已部署>（最後更新 YYYY-MM-DD，<哪一輪或哪個 commit>）
 > 新 session 先讀「機台狀態」和「已確立的物理事實」，再讀下方進度。

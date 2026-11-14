@@ -14,7 +14,7 @@
 | [skills/line-sop/SKILL.md](skills/line-sop/SKILL.md) | 檢測線「研究 → 定版 → 接入」三階段 SOP | 紀律四／七／八 |
 | [skills/agent-handoff/SKILL.md](skills/agent-handoff/SKILL.md) | 雙代理接手、交接卡、寫入權、skills 鏡射 | [growth/07](../growth/07_knowledge_architecture.md) |
 | [memory_entry.md](memory_entry.md) | 跨 session 記憶的條目格式、索引與規則 | [growth/07](../growth/07_knowledge_architecture.md) |
-| [status_card.md](status_card.md) | 每條檢測線的現況卡 | [growth/07](../growth/07_knowledge_architecture.md) |
+| [status_card.md](status_card.md) | 每條檢測線的現況表 | [growth/07](../growth/07_knowledge_architecture.md) |
 | [method_selection.md](method_selection.md) | 方法選擇書、方法包、換路線聲明 | 紀律八、[growth/03](../growth/03_method_family_drift.md) |
 | [scoreboards.md](scoreboards.md) | 方法層記分板、LLM 看圖記分板 | 紀律八、九 |
 | [discipline_checklist.md](discipline_checklist.md) | 每輪紀律檢核區塊、開工前五問、診斷表、提案、翻轉清單、初判檔、機械檢查規格 | [discipline/](../discipline/) |

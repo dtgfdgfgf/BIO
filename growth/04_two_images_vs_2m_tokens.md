@@ -1,6 +1,6 @@
 # 04 224 萬 token 被兩張圖推翻
 
-> **Summary (EN)**: To remove one false-positive candidate without losing any real fiber, the LLM agent ran a five-facet multi-agent analysis over the numeric features of 274 candidates. It took about 2.24 million tokens and three hours, and produced three rule proposals. It followed every rule I had in place, and never opened an image. Two zoomed crops (1,746 tokens) overturned all of it: reagent is yellow, broken blobs; fibers are continuous threads of constant width. The real problems were upstream: the defect definition had not been signed off, and the reagent film was not modeled. I now run a stage gate before every round, so no threshold work or heavy analysis starts until definition, imaging and structure are settled, and every rule states how it is enforced.
+> **Summary (EN)**: To remove one false-positive candidate without losing any real fiber, the LLM agent ran a five-facet multi-agent analysis over the numeric features of 274 candidates. It took about 2.24 million tokens and three hours, and produced three rule proposals. It followed every rule I had in place, and never opened an image. Two zoomed crops (1,746 tokens) overturned all of it: reagent is yellow, broken blobs; fibers are continuous threads of constant width. The real problems were upstream: the defect definition had not been signed off, and the reagent film was not marked as a known structure. I now run a stage gate before every round, so no threshold work or heavy analysis starts until definition, imaging and structure are settled, and every rule states how it is enforced.
 
 ---
 
@@ -41,12 +41,12 @@ LLM 的任務是：找一條規則把這條踢掉，同時不能誤刪任何一�
 事後回頭看，問題不在判定這一步，而在更上游：
 
 - **錯在「產生」，不在「判定」**：一團一團的藥水，被骨架化串成了一條線，才變成候選。這條候選根本不該存在，在判定階段多加條件，只是貼補丁。
-- **藥膜區沒有建模**：系統的結構模型裡沒有藥膜這一層。候選落在系統不認識的區域，反而被解讀成「沒有沿著任何已知結構走，所以更像異物」。方向剛好反了。
+- **藥膜區沒有標出來**：系統標出的已知結構裡沒有藥膜這一層。候選落在系統不認識的區域，反而被解讀成「沒有沿著任何已知結構走，所以更像異物」。方向剛好反了。
 - **「藥水算不算毛屑」是定義問題**：答案在我這裡，不在數據裡。而當時這個定義我還沒有拍板。
 
 ```mermaid
 flowchart LR
-  A["1 定義<br/>藥水算不算毛屑：未拍板"] --> B["2 取像<br/>未驗證"] --> C["3 結構建模<br/>藥膜沒建模"] --> D["4 判別"] --> E["5 門檻"]
+  A["1 定義<br/>藥水算不算毛屑：未拍板"] --> B["2 取像<br/>未驗證"] --> C["3 標出已知結構<br/>藥膜沒標"] --> D["4 判別"] --> E["5 門檻"]
   W["224 萬 token<br/>三個修改案"] -.->|工作做在這裡| D
   W -.-> E
   style A fill:#f8d7da
@@ -70,7 +70,7 @@ flowchart LR
 - **開工前四問（階段閘門）**：每一輪動工前，先回答四題：
   1. 瑕疵的定義拍板了嗎？
   2. 這個瑕疵在目前的取像條件下，穩定看得到嗎？
-  3. 產品的每一層都建模了嗎？哪些還沒有？
+  3. 產品每一層的已知結構都標出來了嗎？哪些還沒有？
   4. 這一輪要關掉哪一個開放問題？
 
   LLM 寫答案，並指向證據檔案，由我簽核。任何一題答「否」，就不准出門檻相關的覆核包，也不准啟動多代理、全量統計這類重型分析，只能做那一題的上游工作。
@@ -85,7 +85,7 @@ flowchart LR
 ## 後來
 
 - 09-24 我拍板了定義：只排除正常點藥。
-- 之後把隔片當成已知結構建模，再換到「建模背景→殘差二值化」的方法，見 [03](03_method_family_drift.md)。
+- 之後把隔片標成已知結構，再換到「估計背景→殘差二值化」的方法，見 [03](03_method_family_drift.md)。
 - 09-29 階段閘門又加了第五問：「最簡單的方法跑過了嗎？」這是 03 的教訓。
 
 ## 限制
