@@ -11,7 +11,7 @@
 |---|---|---|
 | 01 | [接手遺留系統：先唯讀、先建基準線 / Taking over a legacy system: read-only first, baseline first](01_legacy_takeover.md) | ✅ |
 | 02 | [從「讓 LLM 寫程式」到「讓 LLM 收斂」 / From "LLM writes code" to "LLM converges"](02_from_writing_code_to_converging.md) | ✅ |
-| 03 | [案例：方法族漂移 / Case: method-family drift](03_method_family_drift.md) | ✅ |
+| 03 | [案例：LLM 一直換路線 / Case: the agent kept switching approaches](03_method_family_drift.md) | ✅ |
 | 04 | [案例：224 萬 token 被兩張圖推翻 / Case: 2.24M tokens overturned by two images](04_two_images_vs_2m_tokens.md) | ✅ |
 | 05 | [人在迴路：覆核介面、判例→規則、LLM 看圖記分板 / Human in the loop](05_human_in_the_loop.md) | ✅ |
 | 06 | [取像條件與量測可信度 / Imaging domain and measurement trust](06_imaging_domain_and_measurement_trust.md) | ✅ |

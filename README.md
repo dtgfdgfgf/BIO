@@ -69,7 +69,7 @@ Short on time? Read 09 (the conclusion), then 02 (the main thread), then one cas
 | [09 標註不等於收斂](growth/09_labels_are_not_convergence.md) | 以為標好 OK／NG 就能讓 LLM 收斂，結果收斂靠的是我對影像分區的判斷 / I expected labels to drive convergence; my reading of the image zones did |
 | [10 換了專案還成立嗎](growth/10_does_it_hold_elsewhere.md) | 一年 20 多個案子交叉檢查：哪些結論在別處也成立，哪個教訓學了兩次 / Cross-checking 20+ projects: which lessons held elsewhere, and which one I had to learn twice |
 | [02 從「讓 LLM 寫程式」到「讓 LLM 收斂」](growth/02_from_writing_code_to_converging.md) | 主線：迭代紀律 v1～v7 各從哪一次失敗長出來 / The main thread: where each version of the iteration discipline came from |
-| [03 方法族漂移](growth/03_method_family_drift.md) | LLM 自選 6 次方法，0 次留下 / The agent picked a method six times; none survived |
+| [03 LLM 一直換路線](growth/03_method_family_drift.md) | LLM 自選 6 次方法，0 次留下 / The agent picked a method six times; none survived |
 | [04 224 萬 token 被兩張圖推翻](growth/04_two_images_vs_2m_tokens.md) | 規則全守了還是走錯，缺的是階段閘門 / Every rule followed, still wrong: the missing stage gate |
 | [05 人在迴路](growth/05_human_in_the_loop.md) | 我的判斷怎麼留下來，怎麼替 LLM 的眼睛打分數 / Keeping human verdicts, and scoring the agent's eyes |
 | [06 取像條件與量測可信度](growth/06_imaging_domain_and_measurement_trust.md) | 常數屬於取像條件，不屬於演算法 / Constants belong to the imaging setup, not the algorithm |

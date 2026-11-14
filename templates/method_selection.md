@@ -1,63 +1,63 @@
-# 方法選擇書、方法包、換族聲明
+# 方法選擇書、方法包、換路線聲明
 
-> **Summary (EN)**: Templates for rule eight. Before the first prototype of an inspection line, list at least three method families from simplest to most complex, each with the image assumption it relies on, where it will fail, and its compute shape. Run the simplest one for real and show its failure images to the human, who signs "fix within family" or "switch family". Any later switch requires a written declaration of the minimal in-family fix, why it cannot work, and the evidence. Background in [growth/03](../growth/03_method_family_drift.md).
+> **Summary (EN)**: Templates for rule eight. Before the first prototype of an inspection line, list at least three approaches from simplest to most complex, each with the image assumption it relies on, where it will fail, and its compute shape. Run the simplest one for real and show its failure images to the human, who signs "fix the current approach" or "switch approach". Any later switch requires a written declaration of the minimal fix within the current approach, why it cannot work, and the evidence. Background in [growth/03](../growth/03_method_family_drift.md).
 
-規則見 [discipline/rules.md 紀律八](../discipline/rules.md#紀律八方法族)。
+規則見 [discipline/rules.md 紀律八](../discipline/rules.md#紀律八方法路線)。
 
 ## 1. 方法選擇書
 
-每條線出第一個原型前寫，放在該線現況卡的「方法族」節。
+每條線出第一個原型前寫，放在該線現況卡的「方法路線」節。
 
-| # | 方法族 | 假設影像長什麼樣 | 會在哪裡失敗 | 計算形狀 | 狀態 |
+| # | 方法路線 | 假設影像長什麼樣 | 會在哪裡失敗 | 計算形狀 | 狀態 |
 |---|---|---|---|---|---|
-| 1 | <最簡的那族> | <這方法在什麼前提下成立> | <前提不成立時的症狀> | <範圍／掃幾遍／核多大> | 實跑中 |
+| 1 | <最簡的那條路線> | <這方法在什麼前提下成立> | <前提不成立時的症狀> | <範圍／掃幾遍／核多大> | 實跑中 |
 | 2 | <…> | | | | 未跑 |
 | 3 | <…> | | | | 未跑 |
 
 填寫規則：
 
-- 至少三族，由簡到繁。
+- 至少三條路線，由簡到繁。
 - 「假設影像長什麼樣」寫前提，「會在哪裡失敗」寫前提不成立時會看到什麼。
 - 計算形狀寫三件事：跑在什麼範圍（全圖／ROI／只有候選）、掃幾遍、核多大。
-- **最簡那族必須實跑。** 沒跑過的族，「會在哪裡失敗」只能寫預測，要標明。
-- 族的定義看**候選產生階段**用什麼方法，不看後面的篩選規則。
+- **最簡那條路線必須實跑。** 沒跑過的路線，「會在哪裡失敗」只能寫預測，要標明。
+- 路線的分法看**候選產生階段**用什麼方法，不看後面的篩選規則。
 
 ### 示意：本專案的細絲檢測線（去識別化）
 
-| # | 方法族 | 假設影像長什麼樣 | 會在哪裡失敗（實證） | 計算形狀 | 下場 |
+| # | 方法路線 | 假設影像長什麼樣 | 會在哪裡失敗（實證） | 計算形狀 | 下場 |
 |---|---|---|---|---|---|
-| 1 | 全域灰階門檻＋輪廓篩選 | 異物和背景的灰階差在整個 ROI 內一致；異物是獨立輪廓 | 底色不一致時，跨底色的細絲被切段 | 全圖一遍門檻×2 極性＋一遍連通 | 被換族。**事後看：失敗原因是背景沒建模，應該修同族** |
+| 1 | 全域灰階門檻＋輪廓篩選 | 異物和背景的灰階差在整個 ROI 內一致；異物是獨立輪廓 | 底色不一致時，跨底色的細絲被切段 | 全圖一遍門檻×2 極性＋一遍連通 | 被換掉。**事後看：失敗原因是背景沒建模，應該修原路線** |
 | 2 | 方向性局部對比脊線＋骨架化＋最長路徑 | 異物＝比兩側有對比的細長物；產品結構靠下游規則剔除 | 所有細長對比結構都進候選：產品邊緣、框線、表面刷痕 | 全圖多方向×多距離取樣×2 極性、細化、最長路徑；約效能預算的 4 倍 | 六天八輪補丁後退出 |
 | 3 | 已知結構建模 → 扣背景 → 殘差二值化 → 獨立輪廓 | 產品每一層都能建模；異物＝無法被已知結構解釋的殘差 | 緊貼結構的異物會漏；跨結構邊的異物會被切兩段 | 分區背景各一遍＋一遍連通；約預算的三分之一 | 方向是我給的（「細絲是獨立輪廓，二值化可分」），「扣背景取殘差」是 LLM 的詮釋；一天七版，開發集召回 29／29 |
 
-族 3 其實就是族 1 的同族修正。但它的殘差在背景模型錯的地方全變成輪廓，又引出一串補丁。後來我判定「用殘差並不合理」，依影像的分區特徵改成：已知結構寫成固定遮罩、每一區各自用固定門檻，不再逐像素扣背景。接進機台的是這一版，也就是最簡單的族 1 加上分區。
+路線 3 其實就是在路線 1 上修正。但它的殘差在背景模型錯的地方全變成輪廓，又引出一串補丁。後來我判定「用殘差並不合理」，依影像的分區特徵改成：已知結構寫成固定遮罩、每一區各自用固定門檻，不再逐像素扣背景。接進機台的是這一版，也就是最簡單的路線 1 加上分區。
 
 ## 2. 方法包
 
-交給使用者簽「修同族／換族」用。
+交給使用者簽「修原路線／換路線」用。
 
-- **放**：方法選擇書；最簡那族在 5～10 張代表圖上的**逐階段中間圖**和**失敗圖**。
+- **放**：方法選擇書；最簡那條路線在 5～10 張代表圖上的**逐階段中間圖**和**失敗圖**。
 - **不放**：判定結果、過殺漏檢率、任何門檻數值表。
-- **只問一題**：「最簡基準在這些圖上這樣失敗，要修同族還是換族？」
+- **只問一題**：「最簡基準在這些圖上這樣失敗，要修原路線還是換路線？」
 - LLM 不得代答。答案寫進現況卡的方法層記分板。
 
-## 3. 換族聲明
+## 3. 換路線聲明
 
-換方法族的那一輪，README 固定這一節。三項寫不齊，就不得換族。
+換方法路線的那一輪，README 固定這一節。三項寫不齊，就不得換路線。
 
 ```markdown
 ## 本輪為何不是修上一版，而是換方法
 
-- 同族最小修正：<針對診斷出的失敗原因，同一族裡最小的修正是什麼>
+- 原路線的最小修正：<針對診斷出的失敗原因，同一條路線裡最小的修正是什麼>
 - 為何它不可能成立：<不是「效果可能不好」，而是為什麼原理上做不到>
 - 證據：<圖或數字的路徑>
 ```
 
-沒換族的輪次，這一節寫一行：
+沒換路線的輪次，這一節寫一行：
 
 ```markdown
 ## 本輪為何不是修上一版，而是換方法
-本輪未換方法族。
+本輪未換方法路線。
 ```
 
 ## 4. 每輪例行一句

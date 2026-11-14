@@ -1,6 +1,6 @@
 # 範本 / Templates
 
-> **Summary (EN)**: Copy-and-adapt templates distilled from the project: the project instruction skeleton (one source of truth plus routing, with authorization semantics), three generalized skills plus a skill skeleton, the cross-session memory entry format, the status card for each inspection line, the method selection sheet and family-switch declaration, the two scoreboards, and the per-round discipline checklist with its supporting forms. Everything has been rewritten for general use; nothing here is the original project's file. Content is in Chinese.
+> **Summary (EN)**: Copy-and-adapt templates distilled from the project: the project instruction skeleton (one source of truth plus routing, with authorization semantics), three generalized skills plus a skill skeleton, the cross-session memory entry format, the status card for each inspection line, the method selection sheet and approach-switch declaration, the two scoreboards, and the per-round discipline checklist with its supporting forms. Everything has been rewritten for general use; nothing here is the original project's file. Content is in Chinese.
 
 從專案裡實際在用的檔案改寫成通用版。產品名稱、路徑、門檻數值都拿掉了，換成 `<尖括號>` 佔位。
 
@@ -15,7 +15,7 @@
 | [skills/agent-handoff/SKILL.md](skills/agent-handoff/SKILL.md) | 雙代理接手、交接卡、寫入權、skills 鏡射 | [growth/07](../growth/07_knowledge_architecture.md) |
 | [memory_entry.md](memory_entry.md) | 跨 session 記憶的條目格式、索引與規則 | [growth/07](../growth/07_knowledge_architecture.md) |
 | [status_card.md](status_card.md) | 每條檢測線的現況卡 | [growth/07](../growth/07_knowledge_architecture.md) |
-| [method_selection.md](method_selection.md) | 方法選擇書、方法包、換族聲明 | 紀律八、[growth/03](../growth/03_method_family_drift.md) |
+| [method_selection.md](method_selection.md) | 方法選擇書、方法包、換路線聲明 | 紀律八、[growth/03](../growth/03_method_family_drift.md) |
 | [scoreboards.md](scoreboards.md) | 方法層記分板、LLM 看圖記分板 | 紀律八、九 |
 | [discipline_checklist.md](discipline_checklist.md) | 每輪紀律檢核區塊、開工前五問、診斷表、提案、翻轉清單、初判檔、機械檢查規格 | [discipline/](../discipline/) |
 

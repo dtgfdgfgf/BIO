@@ -1,6 +1,6 @@
-# 03 方法族漂移：LLM 自選 6 次方法，0 次留下
+# 03 LLM 一直換路線：自選 6 次方法，0 次留下
 
-> **Summary (EN)**: When the simplest baseline failed on one image, the LLM agent did not fix the cause. It swapped in a stronger method family, then spent six days and eight rounds patching it. Each patch made local sense and passed my diff-based rules, because those rules never asked whether the framework itself was right. One sentence of physical judgment from me sent it back to a fixed version of the original family, which reached 29/29 recall in a day. The version that finally went into the machine was the simplest family again, with per-zone thresholds I specified after reading the image zones. I now make the agent write a method selection sheet, run the simplest family first, and let me sign "fix within family" or "switch family" on the failure images before any prototype.
+> **Summary (EN)**: When the simplest baseline failed on one image, the LLM agent did not fix the cause. It switched to a stronger approach, then spent six days and eight rounds patching it. Each patch made local sense and passed my diff-based rules, because those rules never asked whether the framework itself was right. One sentence of physical judgment from me sent it back to a fixed version of the original approach, which reached 29/29 recall in a day. The version that finally went into the machine was the simplest approach again, with per-zone thresholds I specified after reading the image zones. I now make the agent write a method selection sheet, run the simplest approach first, and let me sign "fix the current approach" or "switch approach" on the failure images before any prototype.
 
 ---
 
@@ -12,6 +12,8 @@
 - **產品本身就有很多細長結構**：電極邊、隔片的框、藥膜刷痕，看起來都跟細絲很像。
 
 分工是：LLM 寫演算法、產出覆核包；我不寫演算法，只看圖覆核。
+
+本篇說的「路線」是解題思路，也就是假設瑕疵在影像上長什麼樣。例如「毛屑比背景亮，用亮度差切出來」是一條路線，「毛屑是細長的線，去找線條」是另一條。**修原路線**是假設不變、只修失敗的地方；**換路線**是連假設一起換掉。
 
 ## 1. 當時怎麼做
 
@@ -28,33 +30,33 @@
 
 | 日期 | 方法或規則 | 誰提的 | 下場 |
 |---|---|---|---|
-| 09-18～20 | 族 1：固定門檻二值化＋輪廓 | LLM（最簡基準） | 跨底色切段 → 被換掉，沒有修 |
-| 09-21 | 族 2：脊線＋骨架＋最長路徑 | LLM | 抓進所有細長結構，之後六天都在補丁 |
+| 09-18～20 | 路線 1：固定門檻二值化＋輪廓 | LLM（最簡基準） | 跨底色切段 → 被換掉，沒有修 |
+| 09-21 | 路線 2：脊線＋骨架＋最長路徑 | LLM | 抓進所有細長結構，之後六天都在補丁 |
 | 09-21 | 三個比例門檻 | LLM | 開發集 5 張圖 51／51 全排除，封存集 20 張一跑就破功：真絲被刪、電極邊留下 |
 | 09-21 | 拓樸支線表示法 | LLM | 沒有定版 |
 | 09-22 | 灰區分隔面（大型多代理分析） | LLM | 被兩張放大圖推翻 |
 | 09-24 | 路徑與凸包邊平行 | LLM | 前提不成立，結論是「表示法不足，不改程式」 |
 | 09-24～26 | 把隔片當成已知結構 | **我**（「亮帶就是隔片的邊」） | 成立 |
 | 09-27 | 縮小取樣距離 | LLM | 被我否決：在錯的框架裡打補丁 |
-| 09-27 | 族 3：已知結構建模→扣背景→殘差二值化→獨立輪廓 | **我**給方向；「扣背景取殘差」是 LLM 的詮釋 | 一天七版，召回 29／29 |
+| 09-27 | 路線 3：已知結構建模→扣背景→殘差二值化→獨立輪廓 | **我**給方向；「扣背景取殘差」是 LLM 的詮釋 | 一天七版，召回 29／29 |
 | 10-05～06 | 結構固定遮罩＋分區固定門檻，不再逐像素扣背景 | **我** | 成立，接進機台 |
 
 從 09-21 到 09-27，**LLM 自己提的方法或規則有 6 次，沒有一次留下來；留下來的 2 次，都來自我一句物理判斷。** 最後接進機台的版本，也是我定的。
 
-族 3 的起點是我在 09-27 說的一句話：「細絲是獨立輪廓，二值化可分，區分電極邊緣有很多方法。」其中「先扣背景、再取殘差」是 LLM 對這句話的詮釋，不是我說的。
+路線 3 的起點是我在 09-27 說的一句話：「細絲是獨立輪廓，二值化可分，區分電極邊緣有很多方法。」其中「先扣背景、再取殘差」是 LLM 對這句話的詮釋，不是我說的。
 
 還有兩個事後才看清的事實：
 
-- **更強的方法也更貴**。族 2 單張約 2.45 CPU 核心秒，是當時效能預算的 4 倍；族 3 的分割段只要 0.32 核心秒。
-- **正確答案一直在手邊**。族 1 失敗的原因是「底色不一致，一個門檻管不了全圖」，該做的是同族修正：讓門檻跟著底色走。最後接進機台的「分區固定門檻」就是這個修正，09-21 當天只差一步。
+- **更強的方法也更貴**。路線 2 單張約 2.45 CPU 核心秒，是當時效能預算的 4 倍；路線 3 的分割段只要 0.32 核心秒。
+- **正確答案一直在手邊**。路線 1 失敗的原因是「底色不一致，一個門檻管不了全圖」，該做的是原路線修正：讓門檻跟著底色走。最後接進機台的「分區固定門檻」就是這個修正，09-21 當天只差一步。
 
 ```mermaid
 flowchart TD
-  A["族 1：固定門檻二值化<br/>跨底色把細絲切斷"] -->|LLM 實際走的路| B["族 2：脊線＋骨架<br/>所有細長結構都進候選"]
+  A["路線 1：固定門檻二值化<br/>跨底色把細絲切斷"] -->|LLM 實際走的路| B["路線 2：脊線＋骨架<br/>所有細長結構都進候選"]
   B --> C["六天八輪補丁<br/>全在錯的框架裡"]
-  C -->|我的一句物理判斷| D["族 3：獨立輪廓、二值化可分<br/>扣背景取殘差是 LLM 的詮釋<br/>一天七版，召回 29／29"]
+  C -->|我的一句物理判斷| D["路線 3：獨立輪廓、二值化可分<br/>扣背景取殘差是 LLM 的詮釋<br/>一天七版，召回 29／29"]
   D -->|我判定殘差不合理，改成分區| E["結構固定遮罩＋分區固定門檻<br/>接進機台"]
-  A -.->|應該走的路：同族修正，讓門檻跟著底色走| E
+  A -.->|應該走的路：原路線修正，讓門檻跟著底色走| E
 ```
 
 ## 3. 學到什麼
@@ -66,14 +68,14 @@ flowchart TD
 
 ## 4. 現在怎麼做
 
-- **方法選擇書**：每條檢測線在第一個原型之前，先列出至少三個方法族，由簡到繁。每一族寫三件事：
+- **方法選擇書**：每條檢測線在第一個原型之前，先列出至少三條方法路線，由簡到繁。每一條路線寫三件事：
   - 它假設影像長什麼樣
   - 會在哪裡失敗
   - 計算量多大
 
-  最簡單的那族一定要實際跑過，失敗的圖拿給我看。
-- **由我簽核**：我在失敗圖上簽「修同族」或「換族」，LLM 不可以代答。預設是先修同族。
-- **換族聲明**：真的要換方法，必須寫清楚三件事：同族最小修正是什麼、為什麼它不可能成立、證據在哪。三項寫不齊就不准換，有腳本會檢查。
+  最簡單的那條路線一定要實際跑過，失敗的圖拿給我看。
+- **由我簽核**：我在失敗圖上簽「修原路線」或「換路線」，LLM 不可以代答。預設是先修原路線。
+- **換路線聲明**：真的要換方法，必須寫清楚三件事：原路線的最小修正是什麼、為什麼它不可能成立、證據在哪。三項寫不齊就不准換，有腳本會檢查。
 - **方法層記分板**：欄位是「日期｜方法｜誰提的｜理由｜下場」，只增不改。它不會讓 LLM 變聰明，但能讓我在第三輪就看出「LLM 提的框架又要死了」，而不是等到第十輪。
 - **每輪例行一句**：本輪這種失敗，最簡單的處理方法是什麼？用了沒有？沒用的理由是什麼？這一句很便宜，而且給了我一個可以反問的具體主張。
 
@@ -81,9 +83,9 @@ flowchart TD
 
 ## 後來
 
-10-05，我看完殘差造成的過殺之後判定「用殘差並不合理」：逐像素扣背景時，參考點是模型不是周圍，模型錯的地方全變成輪廓，十幾個補丁都是這樣來的。我改成依影像的分區特徵來做：已知結構寫成固定樣板，每一區各自用固定門檻。最後接進機台的就是這一版。也就是說，最後用的還是最簡單的那一族，只是加上了我給的分區。詳見 [09](09_labels_are_not_convergence.md)。
+10-05，我看完殘差造成的過殺之後判定「用殘差並不合理」：逐像素扣背景時，參考點是模型不是周圍，模型錯的地方全變成輪廓，十幾個補丁都是這樣來的。我改成依影像的分區特徵來做：已知結構寫成固定樣板，每一區各自用固定門檻。最後接進機台的就是這一版。也就是說，最後用的還是最簡單的那條路線，只是加上了我給的分區。詳見 [09](09_labels_are_not_convergence.md)。
 
-（2026-11 更正：本篇初版把族 3 整個寫成我提的。實際上方向是我給的，「扣背景取殘差」是 LLM 的詮釋，後來被我推翻。）
+（2026-11 更正：本篇初版把路線 3 整個寫成我提的。實際上方向是我給的，「扣背景取殘差」是 LLM 的詮釋，後來被我推翻。）
 
 ## 限制
 
